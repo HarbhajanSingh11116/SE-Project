@@ -1,0 +1,19 @@
+{
+  "case_id": "CS-02",
+  "project_name": "Zero-Trust IAM & Platform RBAC Service",
+  "domain": "Identity, Access Control & Zero-Trust IAM (RBAC / MFA)",
+  "functionality": "Role-based access control, restrictive default attributes, MFA, and administrative privilege separation",
+  "document_text": "The platform shall enforce role-based access control (RBAC) across all subjects, objects, and operations with zero unmediated paths. It shall maintain authorized roles, bind users to roles, enforce deny-by-default security attributes, require MFA for all administrative logins, and restrict security function management exclusively to authorized security administrators.",
+  "gold_requirements": [
+    "Enforce RBAC policy covering all subjects, objects, and operations with no unmediated paths.",
+    "Maintain authorized roles, associate users with roles, and enforce restrictive deny-by-default security attributes.",
+    "Require multi-factor authentication (MFA) and restrict security management to authorized administrators."
+  ],
+  "expected_sdlc": ["Agile-DevSecOps Hybrid", "DevSecOps (Continuous Agile)", "Agile-V-Model Hybrid"],
+  "expected_standards": ["FDP_ACC.2.1", "FMT_SMR.1.1", "FMT_MSA.3.1", "FMT_MOF.1.1", "AC-2", "IA-2"],
+  "seeded_ambiguity_sample": "Login should be user-friendly and reasonably secure.",
+  "seeded_conflict_sample": [
+    "The system shall allow unauthenticated management access over internal APIs.",
+    "The system shall block unauthenticated management access over internal APIs."
+  ]
+}

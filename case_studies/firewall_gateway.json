@@ -1,0 +1,19 @@
+{
+  "case_id": "CS-01",
+  "project_name": "Enterprise Boundary & IP Interconnection Firewall",
+  "domain": "Network & Boundary Protection (Firewalls / IDS / IPS / VPN)",
+  "functionality": "Firewall traffic filtering, interface-bound authentication, and network access control enforcement",
+  "document_text": "The interconnection firewall shall enforce access control SFP on all subjects and objects based on source IP, destination IP, transport protocol, and application type (HTTP, SSH, SQL). It shall identify the originating network interface prior to user authentication so attackers cannot authenticate via a secondary interface to bypass access policies. All dropped flows and startup/shutdown audit events shall be logged to an external SIEM and retained for 365 days.",
+  "gold_requirements": [
+    "Enforce information flow and complete access control policy across source/destination IP, protocol, and application type.",
+    "Identify the network interface prior to user authentication and bind sessions to the originating interface.",
+    "Generate and protect security audit records for startup, shutdown, and dropped traffic flows with 365-day retention."
+  ],
+  "expected_sdlc": ["Agile-DevSecOps Hybrid", "DevSecOps (Continuous Agile)", "Agile-V-Model Hybrid"],
+  "expected_standards": ["FDP_IFF.1.1", "FDP_ACC.2", "FDP_ACF.1.1", "FIA_UAU.1.1", "FAU_GEN.1.1"],
+  "seeded_ambiguity_sample": "The firewall shall process traffic fast with appropriate security.",
+  "seeded_conflict_sample": [
+    "Audit logs shall be retained for 365 days in protected storage.",
+    "Audit logs shall be retained for 90 days in protected storage."
+  ]
+}

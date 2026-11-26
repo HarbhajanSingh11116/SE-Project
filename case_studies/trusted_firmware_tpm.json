@@ -1,0 +1,19 @@
+{
+  "case_id": "CS-03",
+  "project_name": "Trusted Hardware TPM & Signed Firmware Update Platform",
+  "domain": "Trusted Computing & Firmware Security (TPM / Secure Boot / OTA)",
+  "functionality": "Physical TPM tamper protection, power-on self-tests, and digitally signed firmware updates",
+  "document_text": "The embedded security module shall physically resist manipulation and probing of TPM silicon and run cryptographic self-tests at initialization. Authorized administrators shall query current firmware versions and initiate updates, while the TSF must verify every firmware package with an ECDSA-P256 or RSA-3072 digital signature prior to installation and reject unsigned images.",
+  "gold_requirements": [
+    "Resist physical manipulation and probing of TPM hardware and execute power-on self-tests.",
+    "Query current firmware version and restrict firmware update initiation to authorized administrators.",
+    "Verify firmware updates via cryptographic digital signature prior to installation."
+  ],
+  "expected_sdlc": ["High-Assurance V-Model", "Agile-V-Model Hybrid"],
+  "expected_standards": ["FPT_PHP.1", "FPT_TST.1", "FPT_TUD_EXT.1.1", "FPT_TUD_EXT.1.2", "FPT_TUD_EXT.1.3"],
+  "seeded_ambiguity_sample": "Firmware updates shall complete quickly.",
+  "seeded_conflict_sample": [
+    "Firmware packages shall be verified using 2048-bit signatures.",
+    "Firmware packages shall be verified using 3072-bit signatures."
+  ]
+}
