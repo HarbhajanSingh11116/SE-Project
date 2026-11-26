@@ -1,0 +1,264 @@
+version: "2026.1"
+models:
+  High-Assurance V-Model:
+    description: "Strict upfront specification paired with phased verification & validation; ideal for hardware/TPM, Common Criteria EAL4+, and immutable safety/security constraints."
+    weights:
+      regulatory_criticality: 2.0
+      formal_verification: 2.0
+      testing_rigor: 2.0
+      requirement_stability: 1.5
+      legacy_dependence: 1.0
+      security_risk: 1.5
+      change_frequency: -1.5
+      continuous_delivery: -1.0
+    phases:
+      - name: "1. Concept & Protection Profile Scoping"
+        activities: ["Identify TOE boundary, assets, and threat agents", "Stakeholder interviews & regulatory baseline lock"]
+        roles: ["Business / Security Analyst", "Compliance / Legal Officer"]
+        deliverables: ["Security Problem Definition", "Approved Scope Baseline"]
+        security_activities: ["Asset & Threat Surface Classification"]
+        testing_requirements: ["Scope completeness review"]
+        compliance_checkpoints: ["Protection Profile applicability sign-off"]
+        approval_gate: "Compliance Officer & Product Owner sign-off"
+        entry_criteria: ["Initial stakeholder brief received"]
+        exit_criteria: ["All stakeholders interviewed; scope approved"]
+      - name: "2. Formal Requirements & Architecture Design"
+        activities: ["Formalize SRS & SFR mappings", "High-level & low-level security architecture"]
+        roles: ["System Architect / Developer", "Information Security Engineer"]
+        deliverables: ["IEEE 830 SRS", "Security Architecture Spec", "RTM v1"]
+        security_activities: ["STRIDE Threat Modeling", "Cryptographic & Hardware Boundary Review"]
+        testing_requirements: ["Requirements testability & conflict audit"]
+        compliance_checkpoints: ["Common Criteria SFR traceability check"]
+        approval_gate: "Security Officer & Architect baseline lock"
+        entry_criteria: ["Approved Scope Baseline"]
+        exit_criteria: ["Zero critical ambiguities or unresolved conflicts"]
+      - name: "3. Hardened Implementation & Component Verification"
+        activities: ["Implement security functions & hardware/firmware drivers", "Unit & static security verification"]
+        roles: ["System Architect / Developer", "Information Security Engineer"]
+        deliverables: ["Signed Source/Firmware Artifacts", "SAST & Unit Test Report"]
+        security_activities: ["SAST, Dependency Audit, Secret Scanning"]
+        testing_requirements: ["100% security unit test pass & branch coverage >= 85%"]
+        compliance_checkpoints: ["Coding standard & crypto compliance verification"]
+        approval_gate: "Engineering Lead & Security Officer review"
+        entry_criteria: ["Locked SRS & Architecture"]
+        exit_criteria: ["Zero High/Critical SAST findings"]
+      - name: "4. System Validation, Penetration Testing & Release"
+        activities: ["Integration, penetration testing, and formal CC acceptance verification", "Production readiness gate"]
+        roles: ["Auditor / Common Criteria Evaluator", "Compliance / Legal Officer", "Project Manager"]
+        deliverables: ["Pen-Test & V&V Report", "Final RTM", "Compliance Evidence Package"]
+        security_activities: ["External Penetration Test", "Cryptographic & Tamper Validation"]
+        testing_requirements: ["Every requirement verified against acceptance criteria"]
+        compliance_checkpoints: ["Final regulatory & audit evidence sign-off"]
+        approval_gate: "Joint PM + Security + Compliance Production Readiness Gate"
+        entry_criteria: ["Component verification passed"]
+        exit_criteria: ["100% traceability coverage & production approval signed"]
+
+  DevSecOps (Continuous Agile):
+    description: "Automated CI/CD security pipeline for rapidly evolving threat landscapes (IDS/IPS rules, API gateways, cloud security services)."
+    weights:
+      continuous_delivery: 2.0
+      change_frequency: 2.0
+      security_risk: 2.0
+      project_complexity: 1.0
+      requirement_stability: -1.0
+    phases:
+      - name: "1. Threat-Informed Backlog & Rapid Discovery"
+        activities: ["Elicit security user stories & threat scenarios", "Automated KB/policy retrieval"]
+        roles: ["Product Owner", "Information Security Engineer"]
+        deliverables: ["Prioritized Security Backlog", "Abuse Cases"]
+        security_activities: ["Incremental Threat Modeling (Evil User Stories)"]
+        testing_requirements: ["Given/When/Then security acceptance criteria"]
+        compliance_checkpoints: ["Policy-as-code baseline check"]
+        approval_gate: "Product Owner & Security Champion backlog triage"
+        entry_criteria: ["Feature request or telemetry anomaly signal"]
+        exit_criteria: ["Stories meet Definition of Ready"]
+      - name: "2. Secure Coding & Automated CI Pipeline"
+        activities: ["Short sprint implementation", "Automated SAST, SCA, secret & container scanning on every PR"]
+        roles: ["System Architect / Developer", "Information Security Engineer"]
+        deliverables: ["Container/Service Build", "SBOM", "CI Security Report"]
+        security_activities: ["SAST + Software Composition Analysis + Container Signing"]
+        testing_requirements: ["Automated unit, API contract & negative security tests"]
+        compliance_checkpoints: ["Automated policy gate (OPA / compliance rules)"]
+        approval_gate: "Automated CI Quality & Security Gate"
+        entry_criteria: ["Pull request opened"]
+        exit_criteria: ["Zero critical CVEs; signed SBOM generated"]
+      - name: "3. Continuous Verification, DAST & Canary CD"
+        activities: ["Dynamic security testing in staging", "Progressive canary rollout with rollback"]
+        roles: ["Operations / SOC Lead", "Information Security Engineer"]
+        deliverables: ["DAST Report", "Deployment Runbook"]
+        security_activities: ["DAST, Fuzzing, Policy Regression Tests"]
+        testing_requirements: ["Transaction/flow integrity & latency SLO verification"]
+        compliance_checkpoints: ["Audit logging & masking verification"]
+        approval_gate: "Security Officer & Ops automated/manual release gate"
+        entry_criteria: ["CI artifacts signed"]
+        exit_criteria: ["Zero critical DAST issues; SLOs green"]
+      - name: "4. Continuous Monitoring & Telemetry Feedback"
+        activities: ["SIEM monitoring, anomaly threshold updates, incident post-mortems"]
+        roles: ["Operations / SOC Lead", "Risk Management Officer"]
+        deliverables: ["Telemetry Dashboards", "Incident & Audit Digest"]
+        security_activities: ["Continuous Vulnerability & Runtime Intrusion Monitoring"]
+        testing_requirements: ["Chaos / tabletop incident drills"]
+        compliance_checkpoints: ["Periodic compliance drift audit"]
+        approval_gate: "SOC Lead & Compliance quarterly review"
+        entry_criteria: ["Live production telemetry"]
+        exit_criteria: ["Feedback converted into next-sprint backlog items"]
+
+  Agile-DevSecOps Hybrid:
+    description: "Balances iterative delivery with mandatory security/compliance gates—best when requirements evolve frequently under strict regulatory oversight."
+    weights:
+      change_frequency: 1.5
+      regulatory_criticality: 1.5
+      security_risk: 2.0
+      continuous_delivery: 1.5
+      testing_rigor: 1.0
+    phases:
+      - name: "1. Governance Framing & Iterative Discovery"
+        activities: ["Lock non-negotiable regulatory controls", "Plan iterative sprint roadmap"]
+        roles: ["Business / Security Analyst", "Compliance / Legal Officer"]
+        deliverables: ["Regulatory Control Baseline", "Initial SRS & Backlog"]
+        security_activities: ["Baseline Threat Model & Data Classification"]
+        testing_requirements: ["Regulatory acceptance criteria defined upfront"]
+        compliance_checkpoints: ["Mandatory Compliance Officer baseline approval"]
+        approval_gate: "Compliance Officer & PM Gate"
+        entry_criteria: ["Stakeholder elicitation complete"]
+        exit_criteria: ["High-risk & compliance requirements approved"]
+      - name: "2. Hardened Agile Sprints (CI + Security)"
+        activities: ["2-week sprints delivering vertical security slices", "Continuous SAST/SCA"]
+        roles: ["System Architect / Developer", "Information Security Engineer"]
+        deliverables: ["Increment Build", "Updated RTM", "CI Security Evidence"]
+        security_activities: ["Peer security review + SAST + Secret scanning"]
+        testing_requirements: ["Automated functional + security regression suite"]
+        compliance_checkpoints: ["Sprint-level traceability verification"]
+        approval_gate: "Architect & Security Officer Sprint Sign-off"
+        entry_criteria: ["Sprint backlog refined"]
+        exit_criteria: ["Increment passes security & functional gates"]
+      - name: "3. Pre-Release Hardening & Compliance Verification"
+        activities: ["End-to-end DAST, penetration testing, and compliance evidence audit"]
+        roles: ["Auditor / Common Criteria Evaluator", "Operations / SOC Lead"]
+        deliverables: ["Pen-Test Report", "Compliance Control Matrix", "Release Package"]
+        security_activities: ["Penetration Testing & Audit Log Verification"]
+        testing_requirements: ["Full integration, failover & load testing"]
+        compliance_checkpoints: ["Formal Compliance Officer release sign-off"]
+        approval_gate: "Production Readiness & Compliance Gate"
+        entry_criteria: ["Release candidate frozen"]
+        exit_criteria: ["All mandatory HITL approvals recorded"]
+
+  Agile-V-Model Hybrid:
+    description: "Iterative feature increments paired with formal V-Model verification & compliance mapping—suited for regulated platforms with evolving scope."
+    weights:
+      regulatory_criticality: 2.0
+      formal_verification: 1.5
+      change_frequency: 1.5
+      testing_rigor: 1.5
+      project_complexity: 1.0
+    phases:
+      - name: "1. Regulatory & Architectural Baseline"
+        activities: ["Establish core architecture and regulatory invariants"]
+        roles: ["System Architect / Developer", "Compliance / Legal Officer"]
+        deliverables: ["Core Architecture Spec", "Compliance Matrix"]
+        security_activities: ["System-Wide Threat Model"]
+        testing_requirements: ["Verification plan per regulatory rule"]
+        compliance_checkpoints: ["Regulatory baseline sign-off"]
+        approval_gate: "Architect & Compliance Officer Gate"
+        entry_criteria: ["Validated requirements"]
+        exit_criteria: ["Architecture & compliance gates locked"]
+      - name: "2. Incremental Specification & Implementation Sprints"
+        activities: ["Refine stories per module; implement with strict traceability"]
+        roles: ["System Architect / Developer", "Business / Security Analyst"]
+        deliverables: ["Module Specs", "Code + Unit Verification"]
+        security_activities: ["SAST & Security Unit Checks"]
+        testing_requirements: ["1:1 requirement-to-test-case mapping"]
+        compliance_checkpoints: ["Continuous RTM update"]
+        approval_gate: "Tech Lead Review"
+        entry_criteria: ["Core architecture approved"]
+        exit_criteria: ["Module verification complete"]
+      - name: "3. Formal V-Model Integration & Acceptance Gate"
+        activities: ["Full system integration, compliance verification, and formal acceptance"]
+        roles: ["Auditor / Common Criteria Evaluator", "Project Manager"]
+        deliverables: ["Formal V&V Report", "Final SRS & RTM"]
+        security_activities: ["Security Assurance & Audit Verification"]
+        testing_requirements: ["Traceability-driven acceptance execution"]
+        compliance_checkpoints: ["Formal Audit Sign-Off"]
+        approval_gate: "Joint Stakeholder & Compliance Production Gate"
+        entry_criteria: ["All modules verified"]
+        exit_criteria: ["100% RTM coverage verified"]
+
+  Spiral:
+    description: "Risk-driven cyclic prototyping for high technical uncertainty, novel security mechanisms, or complex legacy integrations."
+    weights:
+      project_complexity: 2.0
+      legacy_dependence: 1.5
+      security_risk: 1.5
+      requirement_stability: -1.5
+      schedule_pressure: -0.5
+    phases:
+      - name: "1. Objective Determination & Risk Identification"
+        activities: ["Identify architectural unknowns, legacy bottlenecks, and security risks"]
+        roles: ["Risk Management Officer", "System Architect / Developer"]
+        deliverables: ["Risk Register v1", "Spike Objectives"]
+        security_activities: ["Attack-Surface & Feasibility Analysis"]
+        testing_requirements: ["Risk hypothesis test criteria"]
+        compliance_checkpoints: ["Early regulatory feasibility review"]
+        approval_gate: "Risk Manager & Architect Go/No-Go"
+        entry_criteria: ["Initial requirements with high uncertainty"]
+        exit_criteria: ["Top risks ranked with mitigation prototypes"]
+      - name: "2. Risk-Mitigation Prototyping & Evaluation"
+        activities: ["Build security/integration prototypes; test assumptions with stakeholders"]
+        roles: ["System Architect / Developer", "Information Security Engineer"]
+        deliverables: ["Validated Prototype", "Benchmark Results"]
+        security_activities: ["Prototype Threat Validation & Fuzzing"]
+        testing_requirements: ["Proof-of-concept security & latency tests"]
+        compliance_checkpoints: ["Data protection feasibility check"]
+        approval_gate: "Stakeholder & Security Review"
+        entry_criteria: ["Prototype plan approved"]
+        exit_criteria: ["Critical uncertainties resolved"]
+      - name: "3. Hardened Engineering & Release Spiral"
+        activities: ["Convert validated design into production system and complete V&V"]
+        roles: ["System Architect / Developer", "Compliance / Legal Officer"]
+        deliverables: ["Production Release", "Final SRS & RTM"]
+        security_activities: ["Full SAST/DAST & Pen-Test"]
+        testing_requirements: ["Full system acceptance testing"]
+        compliance_checkpoints: ["Final compliance approval"]
+        approval_gate: "Production Readiness Gate"
+        entry_criteria: ["Risks mitigated"]
+        exit_criteria: ["All acceptance & audit checks passed"]
+
+  Waterfall:
+    description: "Sequential gated lifecycle for fixed, stable specifications with extensive upfront sign-offs and minimal expected change."
+    weights:
+      requirement_stability: 2.0
+      testing_rigor: 1.5
+      regulatory_criticality: 1.0
+      change_frequency: -2.0
+      continuous_delivery: -1.5
+    phases:
+      - name: "1. Complete Requirements Lock"
+        activities: ["Finalize all stakeholder interviews and lock SRS"]
+        roles: ["Business / Security Analyst", "Product Owner"]
+        deliverables: ["Signed SRS", "RTM"]
+        security_activities: ["Security Requirements Review"]
+        testing_requirements: ["Requirements completeness sign-off"]
+        compliance_checkpoints: ["Compliance sign-off"]
+        approval_gate: "Formal SRS Freeze Gate"
+        entry_criteria: ["Project charter approved"]
+        exit_criteria: ["Zero open requirement issues"]
+      - name: "2. System Design & Implementation"
+        activities: ["Full design specification followed by sequential build"]
+        roles: ["System Architect / Developer", "Information Security Engineer"]
+        deliverables: ["Architecture Doc", "Built System"]
+        security_activities: ["Threat Model & SAST"]
+        testing_requirements: ["Unit & module test pass"]
+        compliance_checkpoints: ["Design compliance review"]
+        approval_gate: "Design & Build Sign-Off"
+        entry_criteria: ["Frozen SRS"]
+        exit_criteria: ["Build complete"]
+      - name: "3. System Testing & Formal Acceptance"
+        activities: ["End-to-end verification and deployment"]
+        roles: ["Auditor / Common Criteria Evaluator", "Project Manager"]
+        deliverables: ["Test Report", "Release Sign-Off"]
+        security_activities: ["Penetration Test"]
+        testing_requirements: ["100% SRS test execution"]
+        compliance_checkpoints: ["Final audit checkpoint"]
+        approval_gate: "Deployment Sign-Off"
+        entry_criteria: ["Build complete"]
+        exit_criteria: ["Acceptance signed"]

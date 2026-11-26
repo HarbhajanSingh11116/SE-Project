@@ -1,0 +1,83 @@
+version: "2026.1"
+items:
+  - id: KB-NIST-AC
+    title: "NIST SP 800-53 Rev.5 - Access Control & Identification (AC-2, AC-3, AC-6, IA-2)"
+    type: policy
+    standard: "NIST SP 800-53 Rev.5"
+    jurisdiction: "United States / Global Enterprise"
+    effective_date: "2023-09-01"
+    version: "5.1"
+    applicability: ["iam", "rbac", "mfa", "authentication", "authorization", "access control", "zero trust", "user"]
+    sfr_ids: ["AC-2", "AC-3", "AC-6", "IA-2"]
+    controls: ["Least Privilege", "MFA for Privileged & Network Access", "Automated Account Lifecycle"]
+    retention_duty: "Retain identity lifecycle and access review records for 3 years."
+    text: >
+      AC-2/AC-3/AC-6: Organizations must manage account lifecycles, enforce approved authorizations for logical
+      access, and strictly apply least privilege and separation of duties.
+      IA-2: Enforce phishing-resistant multi-factor authentication (MFA) for local and network access to
+      privileged accounts and non-privileged network accounts.
+
+  - id: KB-NIST-SI
+    title: "NIST SP 800-53 Rev.5 - System & Communications Protection (SC-7, SC-8, SI-4)"
+    type: policy
+    standard: "NIST SP 800-53 Rev.5"
+    jurisdiction: "United States / Global Enterprise"
+    effective_date: "2023-09-01"
+    version: "5.1"
+    applicability: ["firewall", "ips", "ids", "telemetry", "anomaly", "network", "tls", "boundary", "monitoring"]
+    sfr_ids: ["SC-7", "SC-8", "SI-4"]
+    controls: ["Boundary Protection & Deny-by-Default", "Transmission Confidentiality", "Continuous Threat Monitoring"]
+    retention_duty: "Retain intrusion detection telemetry and incident alerts for 12 months."
+    text: >
+      SC-7: Monitor and control communications at external and key internal managed interfaces using deny-by-default
+      policies. SC-8: Protect confidentiality and integrity of transmitted information.
+      SI-4: Monitor system traffic continuously to detect attacks, unauthorized connections, and anomalous behavior.
+
+  - id: KB-ISO-27001
+    title: "ISO/IEC 27001:2022 Annex A - Secure SDLC & Data Masking (A.8.11, A.8.24, A.8.25, A.8.28)"
+    type: security_standard
+    standard: "ISO/IEC 27001:2022"
+    jurisdiction: "International"
+    effective_date: "2024-01-01"
+    version: "2022"
+    applicability: ["sdlc", "devsecops", "masking", "privacy", "pii", "testing", "sast", "dast", "coding"]
+    sfr_ids: ["A.8.11", "A.8.24", "A.8.25", "A.8.28"]
+    controls: ["Data Masking (A.8.11)", "Secure Development Lifecycle (A.8.25)", "Secure Coding & SAST/DAST (A.8.28)"]
+    retention_duty: "Retain SAST/DAST reports, threat models, and security sign-offs per release."
+    text: >
+      A.8.11: Data masking shall be used in accordance with access control and privacy policies to protect PII,
+      credentials, and sensitive identifiers before processing or AI exposure.
+      A.8.25/A.8.28: Rules for secure development must be established across the SDLC including threat modeling,
+      SAST/DAST gates, dependency scanning, and security sign-off prior to production deployment.
+
+  - id: KB-OWASP-ASVS
+    title: "OWASP ASVS v4.0.3 - API, Validation & Prompt/Input Injection Protection (V5, V13)"
+    type: re_guideline
+    standard: "OWASP ASVS v4.0.3"
+    jurisdiction: "Global Application Security"
+    effective_date: "2024-04-01"
+    version: "4.0.3"
+    applicability: ["api", "input", "validation", "injection", "rate limit", "web", "service", "llm"]
+    sfr_ids: ["ASVS-V5", "ASVS-V13"]
+    controls: ["Strict Schema Validation", "Injection Defense & Delimiting", "API Rate Limiting"]
+    retention_duty: "Log blocked injection attempts and schema validation failures."
+    text: >
+      ASVS-V5/V13: All untrusted inputs (documents, API payloads, user transcripts) must undergo strict validation,
+      sanitization, and structural isolation before downstream processing. APIs must enforce schema validation,
+      authentication on every endpoint, and rate limiting.
+
+  - id: KB-RE-QUAL
+    title: "IEEE 29148 / ISO 29148 - Requirement Quality & Testability Standard"
+    type: re_guideline
+    standard: "ISO/IEC/IEEE 29148:2018"
+    jurisdiction: "International"
+    effective_date: "2023-01-01"
+    version: "2018"
+    applicability: ["requirement", "quality", "srs", "testable", "unambiguous", "traceability", "all"]
+    sfr_ids: ["IEEE-29148"]
+    controls: ["Singular Atomic Statements", "Quantifiable Acceptance Criteria", "Bidirectional Traceability"]
+    retention_duty: "Maintain versioned requirement baselines and change control records."
+    text: >
+      ISO/IEC/IEEE 29148: Every requirement shall be necessary, implementation-free, unambiguous, consistent,
+      complete, singular, feasible, traceable, and verifiable. Subjective terms ("fast", "secure", "appropriate")
+      must be replaced with measurable thresholds and Given/When/Then acceptance criteria.

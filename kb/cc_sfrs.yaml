@@ -1,0 +1,122 @@
+version: "2026.1"
+items:
+  - id: KB-CC-001
+    title: "FDP_IFF.1.1 & FDP_ACC.2 - Firewall Information Flow & Complete Access Control"
+    type: regulation
+    standard: "Common Criteria v3.1 (Protection Profile: Firewall High Requirements v2.2)"
+    jurisdiction: "International (ISO/IEC 15408)"
+    effective_date: "2024-01-15"
+    version: "2.2"
+    applicability: ["firewall", "network", "traffic", "filtering", "packet", "boundary", "access control"]
+    sfr_ids: ["FDP_IFF.1.1", "FDP_ACC.2"]
+    controls: ["Network Flow Mediation", "Application Protocol Inspection", "Complete Access Policy Coverage"]
+    retention_duty: "Retain firewall policy rules and dropped-flow logs for minimum 365 days."
+    text: >
+      FDP_IFF.1.1: The TSF shall enforce the information flow control SFP based on network origin/destination
+      identity, user origin/destination identity, application protocol (HTTP, HTTPS, SSH, SQL, SMTP, FTP),
+      requested command, date/time of access, and flow frequency/throughput limits.
+      FDP_ACC.2: The TSF shall enforce the access control policy on all subjects and objects, and all
+      operations among subjects and objects covered by the policy with zero unmediated bypass paths.
+
+  - id: KB-CC-002
+    title: "FDP_ACF.1.1 & FIA_UAU.1.1 - IP Interconnection Firewall & Interface Authentication"
+    type: regulation
+    standard: "Common Criteria v3.1 (PP for IP Interconnection Firewall v2.0)"
+    jurisdiction: "International (ISO/IEC 15408)"
+    effective_date: "2024-03-01"
+    version: "2.0"
+    applicability: ["firewall", "interconnection", "interface", "authentication", "network", "protocol"]
+    sfr_ids: ["FDP_ACF.1.1", "FIA_UAU.1.1"]
+    controls: ["Interface-Bound Authentication", "L3/L4 Tuple Access Enforcement"]
+    retention_duty: "Log all cross-interface authentication attempts and session bindings for 180 days."
+    text: >
+      FDP_ACF.1.1: The TSF shall enforce the firewall access control SFP to objects based on source IP
+      address, destination IP address, and transport layer protocol/port.
+      FIA_UAU.1.1: The TSF shall allow identification of the network interface before the user is
+      authenticated and bind authenticated sessions to the originating interface to prevent cross-interface bypass.
+
+  - id: KB-CC-003
+    title: "FDP_ACC.2.1, FMT_SMR.1.1, FMT_MSA.3.1, FMT_MOF.1.1 - OS & Platform RBAC"
+    type: security_standard
+    standard: "Common Criteria (Protection Profile for Access Control in OS v3.0)"
+    jurisdiction: "International / National PP"
+    effective_date: "2023-11-01"
+    version: "3.0"
+    applicability: ["rbac", "access control", "role", "iam", "authorization", "admin", "privilege", "identity"]
+    sfr_ids: ["FDP_ACC.2.1", "FMT_SMR.1.1", "FMT_MSA.3.1", "FMT_MOF.1.1"]
+    controls: ["Role Maintenance", "Restrictive Default Security Attributes", "Admin-Only Security Management"]
+    retention_duty: "Audit all role creation, user-role assignment, and privilege escalation events for 2 years."
+    text: >
+      FDP_ACC.2.1: Enforce Role-Based Access Control on all subjects, objects, and operations.
+      FMT_SMR.1.1: Maintain authorized identified roles and associate users with specific roles.
+      FMT_MSA.3.1: Provide restrictive (deny-by-default) default values for security attributes used to enforce the SFP.
+      FMT_MOF.1.1: Restrict management of security functions strictly to authorized security administrators.
+
+  - id: KB-CC-004
+    title: "FPT_TUD_EXT.1.1-1.3 - Trusted Firmware & Software Update"
+    type: security_standard
+    standard: "Common Criteria Extended Package (Trusted Update)"
+    jurisdiction: "International (ISO/IEC 15408)"
+    effective_date: "2024-05-10"
+    version: "1.3"
+    applicability: ["firmware", "update", "ota", "signature", "integrity", "patch", "tpm", "embedded"]
+    sfr_ids: ["FPT_TUD_EXT.1.1", "FPT_TUD_EXT.1.2", "FPT_TUD_EXT.1.3"]
+    controls: ["Cryptographic Signature Verification", "Authenticated Update Initiation", "Version Query"]
+    retention_duty: "Maintain immutable update verification logs and firmware version manifests for device lifetime."
+    text: >
+      FPT_TUD_EXT.1.1: Provide authorized administrators the ability to query the current firmware/software version.
+      FPT_TUD_EXT.1.2: Restrict firmware/software update initiation solely to authenticated, authorized administrators.
+      FPT_TUD_EXT.1.3: Verify firmware/software packages using an asymmetric digital signature (RSA-3072 / ECDSA-P256+)
+      before installation and reject unsigned or tampered images.
+
+  - id: KB-CC-005
+    title: "FAU_GEN.1.1 & FAU_STG_EXT.1 - Security Audit Generation & Protected Storage"
+    type: regulation
+    standard: "Common Criteria v3.1 (Audit Class FAU)"
+    jurisdiction: "International (ISO/IEC 15408)"
+    effective_date: "2024-02-01"
+    version: "3.1"
+    applicability: ["audit", "logging", "siem", "startup", "shutdown", "monitoring", "traceability", "forensics"]
+    sfr_ids: ["FAU_GEN.1.1", "FAU_STG_EXT.1"]
+    controls: ["Structured Event Logging", "Tamper-Protected Audit Trail", "External SIEM Forwarding"]
+    retention_duty: "Retain security audit trails in append-only protected storage for at least 365 days."
+    text: >
+      FAU_GEN.1.1: Generate audit records for auditable events including start-up/shutdown of audit functions,
+      authentication success/failure, access rejections, and configuration modifications, capturing timestamp,
+      subject identity, source interface/device, and outcome.
+      FAU_STG_EXT.1: Protect stored audit records against unauthorized modification or deletion and forward
+      records securely to an external audit server.
+
+  - id: KB-CC-006
+    title: "FPT_PHP.1 & FPT_TST.1 - TPM Physical Tamper Resistance & Self-Tests"
+    type: security_standard
+    standard: "Common Criteria (Trusted Computing & Hardware Protection)"
+    jurisdiction: "International (TCG / ISO 15408)"
+    effective_date: "2024-01-01"
+    version: "2.0"
+    applicability: ["tpm", "hardware", "tamper", "physical", "self-test", "boot", "silicon", "iot"]
+    sfr_ids: ["FPT_PHP.1", "FPT_TST.1"]
+    controls: ["Physical Probing Resistance", "Power-On Cryptographic Self-Test", "Zeroization on Tamper"]
+    retention_duty: "Log all self-test failures and tamper alerts to non-volatile hardware event log."
+    text: >
+      FPT_PHP.1: The TSF shall provide unambiguous detection and physical resistance against manipulation
+      and probing of hardware security modules (TPM).
+      FPT_TST.1: The TSF shall run a suite of self-tests during initial start-up and periodically during
+      normal operation to verify correct operation of security functions and integrity of TSF data.
+
+  - id: KB-CC-007
+    title: "FCS_COP.1 & FCS_CKM.1 - Cryptographic Operations & Key Lifecycle"
+    type: security_standard
+    standard: "Common Criteria (Cryptographic Support Class FCS)"
+    jurisdiction: "International (FIPS 140-3 / ISO 15408)"
+    effective_date: "2024-06-01"
+    version: "3.1"
+    applicability: ["encryption", "crypto", "vpn", "tls", "key", "kms", "data protection", "replay"]
+    sfr_ids: ["FCS_COP.1", "FCS_CKM.1"]
+    controls: ["Approved Cipher Suites (AES-GCM/ChaCha20)", "Replay Protection on Session Keys", "Key Zeroization"]
+    retention_duty: "Log key generation, rotation, revocation, and destruction events (never raw key material)."
+    text: >
+      FCS_COP.1: Perform cryptographic operations (AES-256-GCM, SHA-256/384, ECDSA) in accordance with
+      validated algorithms and enforce strict replay protection on negotiated session keys.
+      FCS_CKM.1: Generate cryptographic keys using an approved DRBG and securely destroy ephemeral keys upon
+      session termination.
