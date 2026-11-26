@@ -29,7 +29,13 @@ Built around two custom fine-tuned **`Qwen2.5-3B-Instruct` PEFT LoRA adapters** 
 
 ## Development Flow & File-by-File Sequence
 
-Files are structured and committed in the exact dependency order of the architecture so you can walk through the codebase from foundation to UI:
+Files are structured and committed in the exact dependency order of the architecture so you can walk through the codebase from initial model training to the full local application:
+
+### Stage 0 — Model Training & Colab Prototyping (`notebooks/`)
+0. **[`notebooks/01_rag_corpus_builder.ipynb`](notebooks/01_rag_corpus_builder.ipynb)** — Chunks Common Criteria Protection Profiles, extracts SFR IDs, and builds `all-MiniLM-L6-v2` embeddings.
+   - **[`notebooks/02_train_agent1_requirements_lora.ipynb`](notebooks/02_train_agent1_requirements_lora.ipynb)** — Fine-tunes `qwen2.5-3b-cc-agent1` (4-bit QLoRA) for grounded security requirement extraction + v2 negative-abstention training.
+   - **[`notebooks/03_train_agent2_sdlc_lora.ipynb`](notebooks/03_train_agent2_sdlc_lora.ipynb)** — Fine-tunes `qwen2.5-3b-cc-agent2` (4-bit QLoRA) for requirement weighting, dominant-constraint detection, and SDLC recommendation.
+   - **[`notebooks/04_multi_agent_colab_prototype.ipynb`](notebooks/04_multi_agent_colab_prototype.ipynb)** — Clean 2-agent Gradio prototype connecting Agent 1 → Agent 2 before integrating into the full local platform below.
 
 ### Stage 1 — Configuration & Environment
 1. **[`config.py`](config.py)** — Central configuration: paths, domain scopes, 13 requirement categories, 9 stakeholder roles, 6 RBAC roles, 4 joint SDLC vote roles, confidence review threshold (`0.72`), vague-term dictionary, and baseline security controls. Used across every module.
