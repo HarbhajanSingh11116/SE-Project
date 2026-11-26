@@ -18,6 +18,3 @@ demo_output/
 Thumbs.db
 .vscode/
 
-# Large LoRA safetensors (>100 MB exceeds GitHub's single-file push limit without Git LFS)
-# Upload qwen2.5-3b-cc-agent1.zip & qwen2.5-3b-cc-agent2.zip via GitHub Releases or Git LFS.
-models/*/adapter_model.safetensors

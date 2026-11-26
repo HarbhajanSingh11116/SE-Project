@@ -54,7 +54,7 @@ Files are structured and committed in the exact dependency order of the architec
 ### Stage 5 — LLM Runtime & Trained LoRA Integration (`llm/`, `models/`)
 13. **[`llm/json_utils.py`](llm/json_utils.py)** — `extract_json_payload()` strips prose prefixes (e.g., `"Based on the retrieved source material..."`) and markdown fences, then repairs malformed JSON using `json_repair`.
 14. **[`llm/engine.py`](llm/engine.py)** — `LLMEngine` manages `deterministic` mode and `local_gpu` mode (loads 4-bit `unsloth/qwen2.5-3b-instruct-unsloth-bnb-4bit` once into VRAM and hot-swaps PEFT adapters `agent1` and `agent2`, or disables adapters for base model calls, with automatic `mask_payload()` guard).
-15. **`models/`** — Holds your PEFT LoRA adapter configs/tokenizers (`qwen2.5-3b-cc-agent1`, `qwen2.5-3b-cc-agent2`). *(Note: `adapter_model.safetensors` >100 MB weights are excluded from Git via `.gitignore`; attach them via GitHub Releases or Git LFS.)*
+15. **`models/`** — Holds your complete fine-tuned PEFT LoRA adapters (`qwen2.5-3b-cc-agent1`, `qwen2.5-3b-cc-agent2`), with `adapter_model.safetensors` stored directly in the repository via **Git LFS**.
 
 ### Stage 6 — Adaptive Stakeholder Elicitation (`interview/`)
 16. **[`interview/templates.py`](interview/templates.py)** — 12 structured security engineering topics and role-specific focus mappings for 9 stakeholder roles.
@@ -86,14 +86,19 @@ Files are structured and committed in the exact dependency order of the architec
 
 ## Setup & Running Locally (Windows)
 
-1. **Create virtual environment & install dependencies** (Python 3.12 recommended):
+1. **Clone with Git LFS (includes fine-tuned LoRA weights):**
+   ```powershell
+   git lfs install
+   git clone https://github.com/HarbhajanSingh11116/SE-Project.git
+   cd SE-Project
+   git lfs pull
+   ```
+2. **Create virtual environment & install dependencies** (Python 3.12 recommended):
    ```powershell
    python -m venv .venv
    .\.venv\Scripts\pip install torch --index-url https://download.pytorch.org/whl/cu124
    .\.venv\Scripts\pip install -r requirements.txt
    ```
-2. **Add LoRA adapter weights** *(if cloned fresh without large `.safetensors` files)*:
-   Place `adapter_model.safetensors` inside `models/qwen2.5-3b-cc-agent1/` and `models/qwen2.5-3b-cc-agent2/`.
 3. **Launch the Web UI:**
    ```powershell
    .\start_app.ps1
